@@ -6,7 +6,6 @@ import org.junit.Test
 import com.example.simpletodolist.logic.TaskManager
 
 class TaskManagerTest {
-
     private lateinit var manager: TaskManager
 
     /* Inisialisasi TaskManager baru sebelum mulai setiap test */
