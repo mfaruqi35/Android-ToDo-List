@@ -40,4 +40,11 @@ class TaskManagerTest {
         assertTrue(manager.getTasks().isEmpty())
     }
 
+    @Test
+    fun `ceklis task membuat isDone jadi true`(){
+        manager.addTask("Belajar KPL")
+        val id = manager.getTasks().first().id
+        manager.completeTask(id)
+        assertTrue(manager.getTasks().first().isDone)
+    }
 }
