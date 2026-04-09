@@ -26,4 +26,10 @@ class TaskManagerTest {
         assertEquals(0, manager.getTasks().size)
     }
 
+    @Test
+    fun `tambah task kosong kembalikan false`(){
+        val result = manager.addTask(" ")
+        assertFalse(result)
+    }
+
 }
