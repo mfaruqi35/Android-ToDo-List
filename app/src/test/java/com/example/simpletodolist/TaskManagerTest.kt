@@ -32,4 +32,12 @@ class TaskManagerTest {
         assertFalse(result)
     }
 
+    @Test
+    fun `menghapus task menghilangkannya dari list`(){
+        manager.addTask("Belajar KPL")
+        val id = manager.getTasks().first().id
+        manager.deleteTask(id)
+        assertTrue(manager.getTasks().isEmpty())
+    }
+
 }
