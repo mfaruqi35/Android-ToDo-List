@@ -19,4 +19,11 @@ class TaskManagerTest {
         manager.addTask("Belajar KPL")
         assertEquals(1, manager.getTasks().size)
     }
+
+    @Test
+    fun `tambah task kosong tidak menambah ukuran list`(){
+        manager.addTask(" ")
+        assertEquals(0, manager.getTasks().size)
+    }
+
 }
