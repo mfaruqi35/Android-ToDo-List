@@ -41,10 +41,20 @@ class TaskManagerTest {
     }
 
     @Test
-    fun `ceklis task membuat isDone jadi true`(){
+    fun `ceklis task membuat isDone task menjadi true`(){
         manager.addTask("Belajar KPL")
         val id = manager.getTasks().first().id
         manager.completeTask(id)
         assertTrue(manager.getTasks().first().isDone)
+    }
+
+    @Test
+    fun `unceklis task membuat isDone task menjadi false`(){
+        manager.addTask("Belajar KPL")
+        val id = manager.getTasks().first().id
+        manager.completeTask(id)
+        manager.completeTask(id)
+        assertFalse(manager.getTasks().first().isDone)
+
     }
 }
