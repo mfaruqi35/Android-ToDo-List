@@ -57,4 +57,12 @@ class TaskManagerTest {
         assertFalse(manager.getTasks().first().isDone)
 
     }
+
+    @Test
+    fun `menambah banyak task`(){
+        manager.addTask("Task 1")
+        manager.addTask("Task 2")
+        manager.addTask("Task 3")
+        assertEquals(3, manager.getTasks().size)
+    }
 }
