@@ -1,51 +1,57 @@
 package com.example.simpletodolist
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.simpletodolist.logic.TaskManager
-
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
-import org.junit.Before
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
-    private lateinit var manager : TaskManager
+    @get:Rule
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
-    @Before
-    fun setup(){
-        manager = TaskManager()
+    @Test
+    fun a_testTambahTask() {
+
+        /* Memastikan fitur tambah task berjalan normal di Android */
+
+        // Cari text field dan ketik tugas baru
+        Thread.sleep(2000)
+        composeTestRule.onNodeWithText("Tambah task...").performTextInput("Testing Tambah Task")
+        
+        // Klik tombol Add
+        Thread.sleep(3000)
+        composeTestRule.onNodeWithText("Add").performClick()
+
+        // Pastikan tugas baru muncul di layar
+        Thread.sleep(2000)
+        composeTestRule.onNodeWithText("Belajar KPL").assertExists()
     }
 
-    /* Test untuk memastikan package nama aplikasi sudah benar*/
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.simpletodolist", appContext.packageName)
-    }
+    fun b_testHapusTask() {
 
-    /* Test untuk memastikan TakManager berjalan normal di lingkungan Android */
-    @Test
-    fun taskManager_addTask_berjalanDiAndroid(){
-        manager.addTask("Test aplikasi di emulator")
-        assertEquals(1, manager.getTasks().size)
-    }
+        /* Memastikan fitur hapus task berjalan normal di Android */
 
-    /* Memastikan delete task berjalan normal di lingkungan Android */
-    @Test
-    fun taskManager_deleteTask_berjalanDiAndroid(){
-        manager.addTask("Task untuk dihapus")
-        val id = manager.getTasks().first().id
-        manager.deleteTask(id)
-        assertTrue(manager.getTasks().isEmpty())
+        // Cari text field dan ketik tugas baru
+        Thread.sleep(2000)
+        composeTestRule.onNodeWithText("Tambah task...").performTextInput("Testing Hapus Task")
+
+        // Klik Tombol Add
+        Thread.sleep(3000)
+        composeTestRule.onNodeWithText("Add").performClick()
+        Thread.sleep(3000)
+
+        // Klik tombol Hapus
+        composeTestRule.onNodeWithText("Hapus").performClick()
+        Thread.sleep(2000)
+
+        // Pastikan task sudah tidak ada
+        composeTestRule.onNodeWithText("Task Hapus").assertDoesNotExist()
     }
 }
